@@ -1,6 +1,5 @@
 # JvmRaspBypass
 
-由于已经有人公布了这个原理，我也直接发出来吧
 
 代码执行情况下，bypass Elkeid/OpenRASP 的检测
 
