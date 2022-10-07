@@ -1,7 +1,7 @@
 # JvmRaspBypass
 
 
-代码执行情况下，bypass Elkeid/OpenRASP 的检测
+代码执行情况下，bypass Elkeid/OpenRASP/jrasp(native-hook) 的检测
 
 原理请看代码
 

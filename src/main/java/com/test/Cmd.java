@@ -7,19 +7,22 @@ import java.util.Map;
 
 public class Cmd {
     static byte[] helperpath;
-    public static void linuxCmd(String[] var0) throws Exception{
+    public static void linuxCmd(String[] var0,Method forkAndExec) throws Exception{
         Field theUnsafe = Unsafe.class.getDeclaredField("theUnsafe");
         theUnsafe.setAccessible(true);
 
         Unsafe unsafe = (Unsafe) theUnsafe.get(null);
-        Class UNIXProcessClass = Class.forName("java.lang.UNIXProcess");
-        Class ProcessImplClass = Class.forName("java.lang.ProcessImpl");
+        Class<?> UNIXProcessClass = Class.forName("java.lang.UNIXProcess");
+        Class<?> ProcessImplClass = Class.forName("java.lang.ProcessImpl");
         Object unixProc = unsafe.allocateInstance(UNIXProcessClass);
 
-        Method forkAndExec = UNIXProcessClass.getDeclaredMethod("forkAndExec",
-                int.class, byte[].class, byte[].class, byte[].class, int.class, byte[].class, int.class, byte[].class, int[].class,
-                boolean.class);
-        forkAndExec.setAccessible(true);
+        if (forkAndExec == null) {
+            forkAndExec = UNIXProcessClass.getDeclaredMethod("forkAndExec",
+            int.class, byte[].class, byte[].class, byte[].class, int.class, byte[].class, int.class, byte[].class, int[].class,
+            boolean.class);
+            forkAndExec.setAccessible(true);
+        }
+
 
         byte[][] var5 = new byte[var0.length - 1][];
         int var6 = var5.length;
